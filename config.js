@@ -2,11 +2,10 @@ var config = {};
 var db = {};
 db.user = '';
 db.password = '';
-db.uri = '';
 db.schema ="";
 
 var opts = {
-    host: db.uri,
+    host: '',
     dialect: '' ,
     define: {
         //prevent sequelize from pluralizing table names

@@ -3,9 +3,24 @@ var router = express.Router();
 var models = require('../models');
 var _model = models.User;
 
-// Api list get, post[field]
+//  Api calls get, post[field]
 
-//get all objs
+//  get one
+router.get('/:id', function(req, res) {
+    _model.findOne({
+        where:{id: req.params.id}
+    }).then(function(obj) {
+        if(obj){
+            res.send(obj);
+        }else {
+            res.send('no machine found')
+        }
+    }, function (err) {
+        res.send(err);
+    });
+});
+
+//  get all
 router.get('/', function(req, res) {
     _model.findAll().then(function(objs) {
         //res.setHeader('Content-Type', 'application/json');
@@ -13,7 +28,7 @@ router.get('/', function(req, res) {
     });
 });
 
-//post by an update obj
+//  post via an update obj
 router.put('/field', function(req, res) {
     var obj = req.body;
     var updateObject = function() {
@@ -23,13 +38,13 @@ router.put('/field', function(req, res) {
                 ob[prop] = obj[prop];
             }
         }
-        console.log(ob);
         return ob;
     };
-    _model.update(
-        updateObject(),
-        { where: { id: obj.id }
+    _model.update(updateObject(),
+        {
+            where: { id: obj.id }
         }).then( function() {
     });
 });
+
 module.exports = router;
