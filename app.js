@@ -25,4 +25,4 @@ app.use(function (req, res, next) {
 models.sequelize.sync().then(function () {
 	app.listen(config.port);
 });
-console.log('Magic happens on port ' + config.port);
+console.log('Application is running on port: ' + config.port);
