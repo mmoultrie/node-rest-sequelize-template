@@ -5,15 +5,8 @@ var path = require("path");
 var Sequelize= require("sequelize");
 var config= require('../config');
 var db= {};
-var opts = {
-    host: config.db.uri,
-    dialect: 'mysql' ,
-    define: {
-        freezeTableName: true,
-        timestamps: false
-    }
-};
-var sequelize = new Sequelize(config.db.schema, config.db.user, config.db.password, opts);
+
+var sequelize = new Sequelize(config.db.schema, config.db.user, config.db.password, config.opts);
 sequelize
     .authenticate()
     .then(function(err) {
